@@ -1,0 +1,307 @@
+<!DOCTYPE html> 
+
+<html> 
+
+<head> 
+
+    <title>Interactive Quiz</title> 
+
+    <style> 
+
+      body { 
+
+    font-family: Arial, sans-serif; 
+
+    background-color: white; 
+
+    text-align: center; 
+
+    padding: 20px; 
+
+} 
+
+ 
+
+.quiz-container { 
+
+    max-width: 600px; 
+
+    margin: 0 auto; 
+
+    background-color: lightgrey; 
+
+    padding: 20px; 
+
+    border-radius: 8px; 
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+
+} 
+
+ 
+
+h1 { 
+
+    color: black; 
+
+} 
+
+ 
+
+fieldset { 
+
+    margin-bottom: 20px; 
+
+    border: 1px solid lightgrey; 
+
+    padding: 10px; 
+
+    border-radius: 8px; 
+
+    text-align: left; 
+
+} 
+
+ 
+
+legend { 
+
+    font-weight: bold; 
+
+} 
+
+ 
+
+button { 
+
+    background-color: green; 
+
+    color: white; 
+
+    padding: 10px 20px; 
+
+    border: none; 
+
+    border-radius: 4px; 
+
+    cursor: pointer; 
+
+    transition: background-color 0.3s ease; 
+
+} 
+
+ 
+
+button:hover { 
+
+    background-color: lightgreen; 
+
+} 
+
+ 
+
+#quizResults { 
+
+    margin-top: 20px; 
+
+} 
+
+ 
+
+.correct { 
+
+    background-color: lightgrey; 
+
+} 
+
+ 
+
+.incorrect { 
+
+    background-color: lightred; 
+
+} 
+
+ 
+
+    </style> 
+
+</head> 
+
+<body> 
+
+    <div class="quiz-container"> 
+
+        <h1>Interactive Quiz</h1> 
+
+        <form id="quizForm"> 
+
+            <fieldset> 
+
+                <legend>Question 1: What is the capital of France?</legend> 
+
+                <label> 
+
+                    <input type="radio" name="q1" value="Paris"> Paris 
+
+                </label> 
+
+                <label> 
+
+                    <input type="radio" name="q1" value="London"> London 
+
+                </label> 
+
+                <label> 
+
+                    <input type="radio" name="q1" value="Berlin"> Berlin 
+
+                </label> 
+
+            </fieldset> 
+
+             
+
+            <fieldset> 
+
+                <legend>Question 2: What is the largest planet in our solar system?</legend> 
+
+                <label> 
+
+                    <input type="radio" name="q2" value="Jupiter"> Jupiter 
+
+                </label> 
+
+                <label> 
+
+                    <input type="radio" name="q2" value="Saturn"> Saturn 
+
+                </label> 
+
+                <label> 
+
+                    <input type="radio" name="q2" value="Neptune"> Neptune 
+
+                </label> 
+
+            </fieldset> 
+
+ 
+
+            <!-- Add more questions as needed --> 
+
+ 
+
+            <button type="submit">Submit Answers</button> 
+
+        </form> 
+
+ 
+
+        <div id="quizResults"> 
+
+            <p id="resultText"></p> 
+
+            <p id="score"></p> 
+
+        </div> 
+
+    </div> 
+
+ 
+
+    <script> 
+
+      // Fake authentication variable 
+
+let isAuthenticated = true; // Set to true for simplicity, would be more complex in a real scenario 
+
+ 
+
+document.addEventListener('DOMContentLoaded', function() { 
+
+    if (!isAuthenticated) { 
+
+        alert('You are not authenticated to take this quiz.'); 
+
+        return; 
+
+    } 
+
+ 
+
+    const quizForm = document.getElementById('quizForm'); 
+
+    const quizResults = document.getElementById('quizResults'); 
+
+    const resultText = document.getElementById('resultText'); 
+
+    const scoreDisplay = document.getElementById('score'); 
+
+    let score = 0; 
+
+ 
+
+    quizForm.addEventListener('submit', function(event) { 
+
+        event.preventDefault(); 
+
+        score = 0; 
+
+ 
+
+        // Question 1 
+
+        const answer1 = document.querySelector('input[name="q1"]:checked'); 
+
+        if (answer1 && answer1.value === "Paris") { 
+
+            score++; 
+
+            answer1.parentElement.classList.add('correct'); 
+
+        } else if (answer1) { 
+
+            answer1.parentElement.classList.add('incorrect'); 
+
+        } 
+
+ 
+
+        // Question 2 
+
+        const answer2 = document.querySelector('input[name="q2"]:checked'); 
+
+        if (answer2 && answer2.value === "Jupiter") { 
+
+            score++; 
+
+            answer2.parentElement.classList.add('correct'); 
+
+        } else if (answer2) { 
+
+            answer2.parentElement.classList.add('incorrect'); 
+
+        } 
+
+ 
+
+        // Display results 
+
+        resultText.textContent = `You answered ${score} out of ${2} questions correctly.`; 
+
+        scoreDisplay.textContent = `Score: ${score} / ${2}`; 
+
+        quizResults.style.display = 'block'; 
+
+    }); 
+
+}); 
+
+ 
+
+    </script> 
+
+</body> 
+
+</html> 
